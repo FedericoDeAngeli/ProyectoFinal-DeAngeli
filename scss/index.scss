@@ -1,0 +1,28 @@
+
+body{
+    background: linear-gradient(to right, gray 0%, white 80%);
+        
+}
+
+h1{
+    text-align: center;
+}
+
+#cuerpo{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 200px;
+    justify-items: center;
+    align-items: center;
+ 
+}
+
+#mesa img{
+    width: 50%;
+     }
+
+tbody{
+    background-color: black;
+    color: white;
+}
+
