@@ -1,6 +1,8 @@
 
+
 body{
     background: linear-gradient(to right, gray 0%, white 80%);
+    
         
 }
 
@@ -9,7 +11,8 @@ h1{
 }
 
 #cuerpo{
-    display: grid;
+display: none;
+    
     grid-template-columns: 50% 50%;
     gap: 200px;
     justify-items: center;
@@ -21,8 +24,6 @@ h1{
     width: 50%;
      }
 
-tbody{
-    background-color: black;
-    color: white;
+#scorefinal{
+    display: none;
 }
-

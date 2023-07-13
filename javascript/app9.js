@@ -1,5 +1,27 @@
 const RegistrarNombre = document.getElementById("name");
 const BotonRegistrar = document.getElementById("boton");
+const bodyTabla = document.getElementById("inventario");
+const MostrarContenido = document.getElementById("cuerpo");
+const PuertaSalida = document.getElementById("salida");
+const Score = document.getElementById("scorefinal")
+const BotonResultado = document.getElementById("enviarresultado")
+const Player1 = document.getElementById("player");
+const Tiempo1 = document.getElementById("score");
+
+let mesa = document.getElementById("mesa");
+let bata= document.getElementById("bata");
+let caja= document.getElementById("caja");
+let invent= document.getElementById("inventario");
+let nota = document.getElementById("nota");
+let opcion1;
+let opcion2;
+
+const Personaje = [];
+const inventario = [];
+
+
+RegistrarNombre.value = "";
+
 
 BotonRegistrar.addEventListener("click", (e) =>{
     e.preventDefault();
@@ -11,13 +33,17 @@ function Persona(nombre){
 }
 
 function registrarusuario(){
-
     const  Usuario = new Persona(RegistrarNombre.value);
-    Personaje.push(Usuario);
+    Personaje.push(Usuario)
+    alert("Preparate para jugar " + Usuario.nombre);
+if(registrarusuario){
+MostrarContenido.style.display = "grid"
+BotonRegistrar.style.display = "none"
+}
 
     
 }
-const Personaje = [];
+
 
 function Objeto(nombre, caracteristica) {
     this.nombre = nombre;
@@ -25,11 +51,9 @@ function Objeto(nombre, caracteristica) {
 }
 
 function generarTabla(){
-
+    bodyTabla.innerHTML = "";
      inventario.forEach((elemento) => {
-     const bodyTabla = document.getElementById("inventario");
-
-    
+        
         bodyTabla.innerHTML = bodyTabla.innerHTML +
         ` <p>${elemento.nombre}</p>
             `;
@@ -37,16 +61,8 @@ function generarTabla(){
     
     }
 
-    alert("Preparate para jugar " + Personaje.nombre + " " + Persona.apellido);
 
-alert("¿Que elemento deseas inspeccionar?")
 
-let mesa = document.getElementById("mesa");
-let bata= document.getElementById("bata");
-let caja= document.getElementById("caja");
-let invent= document.getElementById("inventario");
-let nota = document.getElementById("nota")
-const inventario = [];
 
 nota.addEventListener("click", btnnota);
 function btnnota(){
@@ -61,9 +77,29 @@ function btncaja(){
 if(control){
     alert("Tienes los elementos para poder crear la llave. Con la llave creada se abrió la caja en la que encontraste una Tabla Periódica");
     
-    const TablaPeriodiocaImg = document.createElement("img");
+    TablaPeriodiocaImg = document.createElement("img");
     TablaPeriodiocaImg.src = "./img/tabla.jpg"
-    document.querySelector("TPeriodica").appendChild(TablaPeriodiocaImg)
+   
+    document.querySelector("body").appendChild(TablaPeriodiocaImg)
+
+    TablaPeriodiocaImg.addEventListener("click", btnTabla)
+
+function btnTabla(){
+    const TablaPeriodioca = [{ nombre: "Oro", simbolo: "Au", z: 79 }, { nombre: "Xenón", simbolo: "Xe", z: 54 }, { nombre: "Litio", simbolo: "Li", z: 3 }, { nombre: "Oxígeno", simbolo: "O", z: 8 }];
+    mirar = parseFloat(prompt("Que deseas ver de la tabla: 1- Nombre de elementos, 2-Simbolos, 3- Numero atómico"));
+
+    if (mirar === 1) {
+        TablaPeriodioca.forEach((elemento) => alert(elemento.nombre));
+    } else {
+        if (mirar === 2) {
+            TablaPeriodioca.forEach((elemento) => alert(elemento.simbolo));
+        } else {
+            if (mirar === 3) {
+                TablaPeriodioca.forEach((elemento) => alert(elemento.z));
+            }
+        }
+    }
+}
     
     
 }else{
@@ -73,11 +109,11 @@ if(control){
 
 mesa.addEventListener("click", btnmesa);
 
-let opcion1
+
 
 function btnmesa() {
 
-    opcion1 = parseFloat(prompt("Alumno " + Personaje.nombre + " Frente a ti hay dos objetos. ¿Cual deseas recoger y revisar primero? 1-bloque de metal, 2-Mechero de Bunsen"));
+    opcion1 = parseFloat(prompt("Alumno " + Personaje[0].nombre + " Frente a ti hay dos objetos. ¿Cual deseas recoger y revisar primero? 1-bloque de metal, 2-Mechero de Bunsen"));
 
     if (opcion1 === 1) {
   
@@ -117,12 +153,12 @@ function btnmesa() {
 } 
 
 
-let opcion2
+
 bata.addEventListener("click", btnbata);
 
 function btnbata(){
     
-                opcion2 = parseFloat(prompt("Bien estudiante " + Persona.apellido + " En el bolsillo de la bata encontraste dos objetos. ¿Cual deseas recoger y revisar primero? 1-Mensaje en papel, 2-Molde de llave"));
+                opcion2 = parseFloat(prompt("Bien estudiante " + Personaje[0].nombre + " En el bolsillo de la bata encontraste dos objetos. ¿Cual deseas recoger y revisar primero? 1-Mensaje en papel, 2-Molde de llave"));
 
 
                 if (opcion2 === 1) {
@@ -157,22 +193,45 @@ function btnbata(){
                     }
                 }
 }
-PTable = document.getElementById("TPeriodica")
-PTable.addEventListener("click", btnTabla)
 
-function btnTabla(){
-    const TablaPeriodioca = [{ nombre: "Oro", simbolo: "Au", z: 79 }, { nombre: "Xenón", simbolo: "Xe", z: 54 }, { nombre: "Litio", simbolo: "Li", z: 3 }, { nombre: "Oxígeno", simbolo: "O", z: 8 }];
-    mirar = parseFloat(prompt("Recuerda el mensaje de socorro que tienes: AuXeLiO. Que deseas ver de la tabla: 1- Nombre de elementos, 2-Simbolos, 3- Numero atómico"));
+PuertaSalida.addEventListener("click", btnSalida);
 
-    if (mirar === 1) {
-        TablaPeriodioca.forEach((elemento) => alert(elemento.nombre));
-    } else {
-        if (mirar === 2) {
-            TablaPeriodioca.forEach((elemento) => alert(elemento.simbolo));
-        } else {
-            if (mirar === 3) {
-                TablaPeriodioca.forEach((elemento) => alert(elemento.z));
-            }
-        }
-    }
+function findejuego(){
+    alert("Felicidades! Completaste el juego");
+    MostrarContenido.style.display = "none";
+    RegistrarNombre.style.display= "none"
+   TablaPeriodiocaImg.style.display = "none"
+Score.style.display = "block"
 }
+
+function btnSalida(){
+    const codigo = parseFloat(prompt("Cual es el código de salida " + Personaje[0].nombre));
+    codigo === 795438 ? findejuego() : alert("Código ingresado incorrecto");
+ 
+}
+
+function resultadoFinal (nombre, tiempo){
+    this.nombre = nombre;
+    this.tiempo = tiempo;
+}
+
+BotonResultado.addEventListener("click", btnResultado)
+
+function btnResultado(){
+    const UsuarioTiempo = new resultadoFinal(Player1.value, Tiempo1.value);
+
+    const UsuarioTiempoJSON = JSON.stringify(UsuarioTiempo);
+
+    localStorage.setItem("name", UsuarioTiempoJSON);
+
+    const UsuarioTiempoString = localStorage.getItem("name")
+    
+    const UsuarioTiempoParse = JSON.parse(UsuarioTiempoString);
+
+    console.log(UsuarioTiempoParse)
+ 
+
+}
+
+
+
