@@ -35,7 +35,11 @@ function Persona(nombre){
 function registrarusuario(){
     const  Usuario = new Persona(RegistrarNombre.value);
     Personaje.push(Usuario)
-    alert("Preparate para jugar " + Usuario.nombre);
+    Swal.fire({
+        icon: `success`,
+        text: `Registrado. Preparate para jugar ` + Usuario.nombre,
+    })
+    
 if(registrarusuario){
 MostrarContenido.style.display = "grid"
 BotonRegistrar.style.display = "none"
@@ -66,7 +70,16 @@ function generarTabla(){
 
 nota.addEventListener("click", btnnota);
 function btnnota(){
-    alert("En mi intento de preparar a mis estudiantes como los mejores en Química he diseñado este desafío. Completa el mismo o sufre las consecuencias")
+    Swal.fire({
+        title: 'Nota',
+        text: "En mi intento de preparar a mis estudiantes como los mejores en Química he diseñado este desafío. Completa el mismo o sufre las consecuencias",
+        imageUrl: './img/cientifico-loco.jpg',
+        imageWidth: 200,
+        imageHeight: 400,
+        imageAlt: 'Científico Loco',
+      })
+    
+    
 }
 
 caja.addEventListener("click", btncaja)
