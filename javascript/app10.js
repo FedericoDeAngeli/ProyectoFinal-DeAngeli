@@ -53,7 +53,7 @@ function registrarusuario() {
 
         setTimeout(() => {
             FinJuego();
-        }, 60000);
+        }, 600000);
         MostrarContenido.style.display = "grid"
         BotonRegistrar.style.display = "none"
     }
@@ -115,26 +115,45 @@ function btncaja() {
         document.querySelector("body").appendChild(TablaPeriodiocaImg)
 
         TablaPeriodiocaImg.addEventListener("click", btnTabla)
+        caja.style.display = "none";
 
 
         function btnTabla() {
             const TablaPeriodioca = [{ nombre: "Oro", simbolo: "Au", z: 79 }, { nombre: "Xenón", simbolo: "Xe", z: 54 }, { nombre: "Litio", simbolo: "Li", z: 3 }, { nombre: "Oxígeno", simbolo: "O", z: 8 }];
-            mirar = parseFloat(prompt("Que deseas ver de la tabla: 1- Nombre de elementos, 2-Simbolos, 3- Numero atómico"));
 
-            if (mirar === 1) {
-                TablaPeriodioca.forEach((elemento) => {Swal.fire({
-                    title: (elemento.nombre),
-                })
-                });
-            } else {
-                if (mirar === 2) {
-                    TablaPeriodioca.forEach((elemento) => alert(elemento.simbolo));
-                } else {
-                    if (mirar === 3) {
-                        TablaPeriodioca.forEach((elemento) => alert(elemento.z));
-                    }
+            Swal.fire({
+                title: 'Tabla Periódica',
+                text: "Recuerda el mensaje: AuXeLiO. Cual información de la Tabla deseas consultar?",
+                showDenyButton: true,
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Nombre de los elementos',
+                denyButtonText: "Símbolo de los elementos",
+                cancelButtonText: "Números atómicos"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    TablaPeriodioca.forEach((elemento) => {
+                        Swal.fire({
+                            title: (elemento.nombre),
+                        })
+                    })
+                } else if (result.isDenied) {
+                    TablaPeriodioca.forEach((elemento) => {
+                        Swal.fire({
+                            title: (elemento.simbolo),
+                        })
+                    })
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    TablaPeriodioca.forEach((elemento) => {
+                        Swal.fire({
+                            title: (elemento.z),
+                        })
+                    })
+
+
                 }
-            }
+            })
+
         }
 
 
@@ -170,7 +189,7 @@ function btnmesa() {
                 Toastify({
                     text: "Ya tienes Bloque de metal en tu inventario",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#74c69d"
                     }
                 }).showToast();
@@ -180,7 +199,7 @@ function btnmesa() {
                 Toastify({
                     text: "Recogiste " + metal.nombre + " y sirve porque " + metal.caracteristica,
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#74c69d"
                     }
                 }).showToast();
@@ -188,7 +207,7 @@ function btnmesa() {
                 Toastify({
                     text: "Agregado " + metal.nombre + " a tu inventario",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#74c69d"
                     }
                 }).showToast();
@@ -202,7 +221,7 @@ function btnmesa() {
                 Toastify({
                     text: "Ya tienes Mechero de Bunsen",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#073b4c"
                     }
                 }).showToast();
@@ -212,7 +231,7 @@ function btnmesa() {
                 Toastify({
                     text: "Recogiste " + bunsen.nombre + " y sirve porque " + bunsen.caracteristica,
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#073b4c"
                     }
                 }).showToast();
@@ -221,7 +240,7 @@ function btnmesa() {
                 Toastify({
                     text: "Agregado " + bunsen.nombre + " a tu inventario",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#073b4c"
                     }
                 }).showToast();
@@ -255,7 +274,7 @@ function btnbata() {
                 Toastify({
                     text: "Ya tienes Papel con Mensaje",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#ff758f"
                     }
                 }).showToast();
@@ -266,7 +285,7 @@ function btnbata() {
                 Toastify({
                     text: "Recogiste " + mensaje.nombre + " y sirve porque " + mensaje.caracteristica,
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#ff758f"
                     }
                 }).showToast();
@@ -275,8 +294,8 @@ function btnbata() {
                 Toastify({
                     text: "Agregado " + mensaje.nombre + " a tu inventario",
                     duration: 3000,
-                    style:{
-                        background:"#ff758f"
+                    style: {
+                        background: "#ff758f"
                     }
                 }).showToast();
 
@@ -289,7 +308,7 @@ function btnbata() {
                 Toastify({
                     text: "Ya tienes Molde de llave",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#6930c3"
                     }
 
@@ -300,7 +319,7 @@ function btnbata() {
                 Toastify({
                     text: "Recogiste " + molde.nombre + " y sirve porque " + molde.caracteristica,
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#6930c3"
                     }
                 }).showToast();
@@ -309,7 +328,7 @@ function btnbata() {
                 Toastify({
                     text: "Agregado " + molde.nombre + " a tu inventario",
                     duration: 3000,
-                    style:{
+                    style: {
                         background: "#6930c3"
                     }
                 }).showToast();
@@ -337,8 +356,8 @@ function btnSalida() {
         input: "password",
         inputLabel: "Código"
 
-            })
-       let password = input.value
+    })
+    let password = input.value
     //const codigo = parseFloat(prompt("Cual es el código de salida " + Personaje[0].nombre));
     password === 795438 ? findejuego() : alert("Código ingresado incorrecto");
 
