@@ -61,6 +61,16 @@ function registrarusuario() {
 
 }
 
+setInterval(() => {
+    Toastify({
+        text: "Se acaba de ir un valioso minuto",
+        duration: 3000,
+        style: {
+            background: "#74c69d"
+        }
+    }).showToast();
+}, 60000);
+
 
 function Objeto(nombre, caracteristica) {
     this.nombre = nombre;
@@ -132,24 +142,32 @@ function btncaja() {
                 cancelButtonText: "Números atómicos"
             }).then((result) => {
                 if (result.isConfirmed) {
+                    let mensaje = "";
+                    
                     TablaPeriodioca.forEach((elemento) => {
-                        Swal.fire({
-                            title: (elemento.nombre),
-                        })
+                      mensaje+= elemento.nombre + " ";
+                    })
+                    swal.fire({
+                        title: mensaje
                     })
                 } else if (result.isDenied) {
+                    let mensaje = "";
+                    
                     TablaPeriodioca.forEach((elemento) => {
-                        Swal.fire({
-                            title: (elemento.simbolo),
-                        })
+                      mensaje+= elemento.simbolo + " ";
+                    })
+                    swal.fire({
+                        title: mensaje
                     })
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    let mensaje = "";
+                    
                     TablaPeriodioca.forEach((elemento) => {
-                        Swal.fire({
-                            title: (elemento.z),
-                        })
+                      mensaje+= elemento.z + " ";
                     })
-
+                    swal.fire({
+                        title: mensaje
+                    })
 
                 }
             })
@@ -351,16 +369,24 @@ function findejuego() {
 }
 
 function btnSalida() {
-    Swal.fire({
-        text: "Cual es el código de salida " + Personaje[0].nombre,
-        input: "password",
-        inputLabel: "Código"
 
-    })
-    let password = input.value
+  
+    (async () => {
+       const {value: password} = await Swal.fire({
+            text: "Cual es el código de salida " + Personaje[0].nombre,
+            input: "password",
+            inputPlaceholder: "password",
+            inputLabel: "Código"
+    
+       })
+        password === "795438" ? findejuego() : alert("Código ingresado incorrecto");
+
+
+   
+  
     //const codigo = parseFloat(prompt("Cual es el código de salida " + Personaje[0].nombre));
-    password === 795438 ? findejuego() : alert("Código ingresado incorrecto");
-
+    
+})()
 }
 
 function resultadoFinal(nombre, tiempo) {
