@@ -22,15 +22,14 @@ const inventario = [];
 
 RegistrarNombre.value = "";
 
+function Persona(nombre) {
+    this.nombre = nombre;
+}
 
 BotonRegistrar.addEventListener("click", (e) => {
     e.preventDefault();
     registrarusuario();
 })
-
-function Persona(nombre) {
-    this.nombre = nombre;
-}
 
 function registrarusuario() {
     const Usuario = new Persona(RegistrarNombre.value);
@@ -40,25 +39,20 @@ function registrarusuario() {
         text: `Registrado. Preparate para jugar ` + Usuario.nombre,
     })
 
-    function FinJuego() {
-        MostrarContenido.style.display = "none"
-        BotonRegistrar.style.display = "none"
-        Swal.fire({
-            icon: "error",
-            text: "Se acabó el tiempo. Perdiste el juego"
-        })
-    }
+    setTimeout(() => {
+        FinJuego();
+    }, 600000);
+    MostrarContenido.style.display = "flex"
+    BotonRegistrar.style.display = "none"
+}
 
-    if (registrarusuario) {
-
-        setTimeout(() => {
-            FinJuego();
-        }, 600000);
-        MostrarContenido.style.display = "grid"
-        BotonRegistrar.style.display = "none"
-    }
-
-
+function FinJuego() {
+    MostrarContenido.style.display = "none"
+    BotonRegistrar.style.display = "none"
+    Swal.fire({
+        icon: "error",
+        text: "Se acabó el tiempo. Perdiste el juego"
+    })
 }
 
 setInterval(() => {
@@ -85,11 +79,9 @@ function generarTabla() {
             ` <p>${elemento.nombre}</p>
             `;
     })
-
 }
 
-
-
+//FUNCIONES SOBRE LA NOTA DE PAPEL//
 
 nota.addEventListener("click", btnnota);
 function btnnota() {
@@ -101,94 +93,10 @@ function btnnota() {
         imageHeight: 300,
         imageAlt: 'Científico Loco',
     })
-
-
 }
 
-caja.addEventListener("click", btncaja)
-function btncaja() {
-
-    const control = inventario.find((elemento) => (elemento.nombre === "Bloque de metal")) && inventario.find((elemento) => (elemento.nombre === "Mechero de Bunsen")) && inventario.find((elemento) => (elemento.nombre === "Molde de llave"))
-
-    if (control) {
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Manos a la obra!',
-            text: "Tienes los elementos para poder crear la llave. Con la llave creada se abrió la caja en la que encontraste una Tabla Periódica",
-
-        });
-
-        TablaPeriodiocaImg = document.createElement("img");
-        TablaPeriodiocaImg.src = "./img/tabla.jpg"
-
-        document.querySelector("body").appendChild(TablaPeriodiocaImg)
-
-        TablaPeriodiocaImg.addEventListener("click", btnTabla)
-        caja.style.display = "none";
-
-
-        function btnTabla() {
-            const TablaPeriodioca = [{ nombre: "Oro", simbolo: "Au", z: 79 }, { nombre: "Xenón", simbolo: "Xe", z: 54 }, { nombre: "Litio", simbolo: "Li", z: 3 }, { nombre: "Oxígeno", simbolo: "O", z: 8 }];
-
-            Swal.fire({
-                title: 'Tabla Periódica',
-                text: "Recuerda el mensaje: AuXeLiO. Cual información de la Tabla deseas consultar?",
-                showDenyButton: true,
-                showCancelButton: true,
-                showConfirmButton: true,
-                confirmButtonText: 'Nombre de los elementos',
-                denyButtonText: "Símbolo de los elementos",
-                cancelButtonText: "Números atómicos"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let mensaje = "";
-                    
-                    TablaPeriodioca.forEach((elemento) => {
-                      mensaje+= elemento.nombre + " ";
-                    })
-                    swal.fire({
-                        title: mensaje
-                    })
-                } else if (result.isDenied) {
-                    let mensaje = "";
-                    
-                    TablaPeriodioca.forEach((elemento) => {
-                      mensaje+= elemento.simbolo + " ";
-                    })
-                    swal.fire({
-                        title: mensaje
-                    })
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    let mensaje = "";
-                    
-                    TablaPeriodioca.forEach((elemento) => {
-                      mensaje+= elemento.z + " ";
-                    })
-                    swal.fire({
-                        title: mensaje
-                    })
-
-                }
-            })
-
-        }
-
-
-    } else {
-        Swal.fire({
-            icon: 'error',
-            title: "Todavía no..",
-            text: "Sigue buscando hasta que tengas todos los elementos para crear la llave",
-        })
-
-    }
-}
-
+//FUNCIONES SOBRE LA MESA//
 mesa.addEventListener("click", btnmesa);
-
-
-
 function btnmesa() {
 
     Swal.fire({
@@ -267,13 +175,10 @@ function btnmesa() {
             }
         }
     })
-
 }
 
-
-
+//FUNCIONES SOBRE LA BATA//
 bata.addEventListener("click", btnbata);
-
 function btnbata() {
 
     Swal.fire({
@@ -357,23 +262,86 @@ function btnbata() {
     })
 }
 
+//FUNCIONES SOBRE LA CAJA DE MADERA//
+caja.addEventListener("click", btncaja)
+function btncaja() {
 
-PuertaSalida.addEventListener("click", btnSalida);
+    const control = inventario.find((elemento) => (elemento.nombre === "Bloque de metal")) && inventario.find((elemento) => (elemento.nombre === "Mechero de Bunsen")) && inventario.find((elemento) => (elemento.nombre === "Molde de llave"))
 
-function findejuego() {
-    Swal.fire({
-text: "Felicidades completaste el juego",
-icon: "success"
-    })
-    MostrarContenido.style.display = "none";
-    RegistrarNombre.style.display = "none"
-    TablaPeriodiocaImg.style.display = "none"
-    Score.style.display = "block"
+    if (control) {
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Manos a la obra!',
+            text: "Tienes los elementos para poder crear la llave. Con la llave creada se abrió la caja en la que encontraste una Tabla Periódica",
+
+        });
+
+        TablaPeriodiocaImg = document.createElement("img");
+        TablaPeriodiocaImg.src = "./img/tabla.jpg"
+
+        document.querySelector("body").appendChild(TablaPeriodiocaImg)
+
+        TablaPeriodiocaImg.addEventListener("click", btnTabla)
+        caja.style.display = "none";
+
+
+        function btnTabla() {
+            const TablaPeriodioca = [{ nombre: "Oro", simbolo: "Au", z: 79 }, { nombre: "Xenón", simbolo: "Xe", z: 54 }, { nombre: "Litio", simbolo: "Li", z: 3 }, { nombre: "Oxígeno", simbolo: "O", z: 8 }];
+
+            Swal.fire({
+                title: 'Tabla Periódica',
+                text: "Recuerda el mensaje: AuXeLiO. Cual información de la Tabla deseas consultar?",
+                showDenyButton: true,
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Nombre de los elementos',
+                denyButtonText: "Símbolo de los elementos",
+                cancelButtonText: "Números atómicos"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let mensaje = "";
+
+                    TablaPeriodioca.forEach((elemento) => {
+                        mensaje += elemento.nombre + " ";
+                    })
+                    swal.fire({
+                        title: mensaje
+                    })
+                } else if (result.isDenied) {
+                    let mensaje = "";
+
+                    TablaPeriodioca.forEach((elemento) => {
+                        mensaje += elemento.simbolo + " ";
+                    })
+                    swal.fire({
+                        title: mensaje
+                    })
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    let mensaje = "";
+
+                    TablaPeriodioca.forEach((elemento) => {
+                        mensaje += elemento.z + " ";
+                    })
+                    swal.fire({
+                        title: mensaje
+                    })
+                }
+            })
+        }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: "Todavía no..",
+            text: "Sigue buscando hasta que tengas todos los elementos para crear la llave",
+        })
+
+    }
 }
 
+//FUNCIONES SOBRE LA PUERTA//
+PuertaSalida.addEventListener("click", btnSalida);
 function btnSalida() {
-
-  
     (async () => {
        const {value: password} = await Swal.fire({
             text: "Cual es el código de salida " + Personaje[0].nombre,
@@ -390,28 +358,22 @@ function btnSalida() {
 })()
 }
 
-function resultadoFinal(nombre, tiempo) {
-    this.nombre = nombre;
-    this.tiempo = tiempo;
+function findejuego() {
+    Swal.fire({
+text: "Felicidades completaste el juego",
+icon: "success"
+    })
+    MostrarContenido.style.display = "none";
+    RegistrarNombre.style.display = "none"
+    TablaPeriodiocaImg.style.display = "none"
+    Score.style.display = "block"
 }
 
-BotonResultado.addEventListener("click", btnResultado)
-
-function btnResultado() {
-    const UsuarioTiempo = new resultadoFinal(Player1.value, Tiempo1.value);
-
-    const UsuarioTiempoJSON = JSON.stringify(UsuarioTiempo);
-
-    localStorage.setItem("name", UsuarioTiempoJSON);
-
-    const UsuarioTiempoString = localStorage.getItem("name")
-
-    const UsuarioTiempoParse = JSON.parse(UsuarioTiempoString);
-
-    console.log(UsuarioTiempoParse)
 
 
-}
+
+
+
 
 
 

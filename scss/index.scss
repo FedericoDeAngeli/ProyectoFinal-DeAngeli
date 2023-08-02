@@ -12,17 +12,45 @@ h1{
 
 #cuerpo{
 display: none;
-    
-    grid-template-columns: 50% 50%;
-    gap: 200px;
-    justify-items: center;
-    align-items: center;
- 
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+gap: 200px;
+justify-content: space-between; 
+}
+
+#nota img{
+ width: 50px;
+ height: 50px;
 }
 
 #mesa img{
-    width: 50%;
-     }
+    width: 500px;
+    height: 300px;
+}
+
+#bata img{
+    width: 150px;
+    height: 200px;
+}
+
+#caja  img{
+    width: 150x;
+    height: 100px;
+}
+
+#salida img{
+    width: 400px;
+    height: 600px;
+}
+
+#inventario{
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    padding: 10px;
+}
+ 
 
 #scorefinal{
     display: none;
