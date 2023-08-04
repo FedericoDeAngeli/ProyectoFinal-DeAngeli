@@ -367,13 +367,46 @@ icon: "success"
     RegistrarNombre.style.display = "none"
     TablaPeriodiocaImg.style.display = "none"
     Score.style.display = "block"
-}
 
-
-
-
-
-
-
-
-
+    
+        
+    const nombreUsuario = Personaje[0].nombre  
+    //const tiempoUsuario = new resultadoFinal(Player1.tiempo)
+    
+    const nombreUsuarioJSON = JSON.stringify(nombreUsuario)
+    //const tiempoUsuarioJSON = JSON.stringify(tiempoUsuario)
+    
+    localStorage.setItem("name", nombreUsuarioJSON)
+    //localStorage.setItem("time", tiempoUsuarioJSON)
+    
+    const nombreUsuarioString = localStorage.getItem("name")
+    //const tiempoUsuarioString = localStorage.getItem("time")
+    
+    const nombreUsuarioParse = JSON.parse(nombreUsuarioString)        
+    // const tiempoUsuarioParse = JSON.parse(tiempoUsuarioString)
+    
+    const tablaResultados = document.getElementById("TablaResultadoFinal");
+    const nuevaFila = document.createElement("tr");
+    
+    const columnaNombre = document.createElement("td");
+    columnaNombre.textContent = nombreUsuarioParse;
+    
+    //const columnaTiempo = document.createElement("td");
+    //columnaTiempo.textContent = tiempoUsuarioParse;
+    
+    // Agregar las nuevas columnas a la fila de resultados
+    nuevaFila.appendChild(columnaNombre);
+    //nuevaFila.appendChild(columnaTiempo);
+    tablaResultados.appendChild(nuevaFila);
+    
+    const ResultadosFinales = [];
+    ResultadosFinales.push(nombreUsuarioParse)
+    localStorage.setItem("jugadores", ResultadosFinales);
+    
+    const resultadosAnteriores = JSON.parse(localStorage.getItem(ResultadosFinales));
+    resultadosAnteriores.forEach((resultado) => {
+        const nuevaFila = document.createElement("tr");
+        nuevaFila.appendChild(columnaNombre);
+        const columnaNombre = document.createElement("td");
+      columnaNombre.textContent = resultadosAnteriores})
+    }

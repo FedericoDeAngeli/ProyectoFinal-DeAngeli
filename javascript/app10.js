@@ -101,8 +101,6 @@ function btnnota() {
         imageHeight: 300,
         imageAlt: 'Científico Loco',
     })
-
-
 }
 
 caja.addEventListener("click", btncaja)
@@ -186,9 +184,6 @@ function btncaja() {
 }
 
 mesa.addEventListener("click", btnmesa);
-
-
-
 function btnmesa() {
 
     Swal.fire({
@@ -273,7 +268,6 @@ function btnmesa() {
 
 
 bata.addEventListener("click", btnbata);
-
 function btnbata() {
 
     Swal.fire({

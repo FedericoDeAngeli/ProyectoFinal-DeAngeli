@@ -1,4 +1,2 @@
-const DateTime = luxon.DateTime
-const dt = DateTime.local
-
-console.log(dt)
+const dt = luxon.DateTime.local();
+console.log(dt.toISO());
