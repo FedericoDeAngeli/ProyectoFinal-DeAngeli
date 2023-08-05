@@ -39,31 +39,31 @@ function registrarusuario() {
         text: `Registrado. Preparate para jugar ` + Usuario.nombre,
     })
 
-    setTimeout(() => {
-        FinJuego();
-    }, 600000);
+    iniciarContador();
     MostrarContenido.style.display = "flex"
     BotonRegistrar.style.display = "none"
+
+    setInterval(() => {
+        Toastify({
+            text: "Queda un minuto menos",
+            duration: 3000,
+            style: {
+                background: "#F70909"
+            }
+        }).showToast();
+      }, 60000);
 }
 
-function FinJuego() {
+function EndGame() {
     MostrarContenido.style.display = "none"
     BotonRegistrar.style.display = "none"
     Swal.fire({
         icon: "error",
         text: "Se acabó el tiempo. Perdiste el juego"
+        
     })
+    clearInterval(intervaloContador)
 }
-
-setInterval(() => {
-    Toastify({
-        text: "Se acaba de ir un valioso minuto",
-        duration: 3000,
-        style: {
-            background: "#74c69d"
-        }
-    }).showToast();
-}, 60000);
 
 
 function Objeto(nombre, caracteristica) {
@@ -87,7 +87,7 @@ nota.addEventListener("click", btnnota);
 function btnnota() {
     Swal.fire({
         title: 'Nota pegada en la pizarra',
-        text: "En mi intento de preparar a mis estudiantes como los mejores en Química he diseñado este desafío. Completa el mismo o sufre las consecuencias",
+        text: "Buenas tardes alumno " + Personaje[0].nombre + ", te recuerdo bien. En mi intento de preparar a mis estudiantes como los mejores en Química he diseñado este desafío. Completa el mismo en menos de 10 minutos o éste será tu último examen",
         imageUrl: './img/cientifico-loco.jpg',
         imageWidth: 200,
         imageHeight: 300,
@@ -101,7 +101,7 @@ function btnmesa() {
 
     Swal.fire({
         title: "Mesada de Laboratorio",
-        text: "Alumno " + Personaje[0].nombre + " Frente a ti hay dos objetos. ¿Cual deseas recoger y revisar primero?",
+        text: "Alumno " + Personaje[0].nombre + " Frente a ti hay dos objetos. ¿Cual deseas recoger?",
         confirmButtonText: "Bloque de metal",
         confirmButtonColor: "#74c69d",
         showDenyButton: "true",
@@ -183,7 +183,7 @@ function btnbata() {
 
     Swal.fire({
         title: "Bata del profesor.",
-        text: "Bien estudiante " + Personaje[0].nombre + " En el bolsillo de la bata encontraste dos objetos. ¿Cual deseas recoger y revisar primero? 1-Mensaje en papel, 2-Molde de llave",
+        text: "Bien estudiante " + Personaje[0].nombre + " en el bolsillo de la bata encontraste dos objetos. ¿Cual deseas recoger?",
         confirmButtonText: "Papel con mensaje",
         confirmButtonColor: "#ff758f",
         showDenyButton: "true",
@@ -204,7 +204,7 @@ function btnbata() {
 
             } else {
 
-                const mensaje = new Objeto("Papel con mensaje", "tiene un mensaje de socorro para leer: AuXeLiO");
+                const mensaje = new Objeto("Papel con mensaje: AuXeLiO", "tiene un mensaje de socorro para leer: AuXeLiO");
                 Toastify({
                     text: "Recogiste " + mensaje.nombre + " y sirve porque " + mensaje.caracteristica,
                     duration: 3000,
@@ -273,7 +273,7 @@ function btncaja() {
         Swal.fire({
             icon: 'success',
             title: 'Manos a la obra!',
-            text: "Tienes los elementos para poder crear la llave. Con la llave creada se abrió la caja en la que encontraste una Tabla Periódica",
+            text: "Excelente! Ahora tienes los elementos para fundir y crear la llave ¿Recuerdas tu clase de propiedades de la materia?. Con la llave creada se abrió la caja en la que encontraste una Tabla Periódica",
 
         });
 
@@ -333,7 +333,7 @@ function btncaja() {
         Swal.fire({
             icon: 'error',
             title: "Todavía no..",
-            text: "Sigue buscando hasta que tengas todos los elementos para crear la llave",
+            text: "Es mejor ir lento, pero seguro. Esta caja debe abrirse con un candado, aunque no lo CREAS, la llave existe",
         })
 
     }
@@ -367,46 +367,45 @@ icon: "success"
     RegistrarNombre.style.display = "none"
     TablaPeriodiocaImg.style.display = "none"
     Score.style.display = "block"
+    almacenarResultados();
+cargarResultados();
+clearInterval(intervaloContador)
+}
 
     
-        
-    const nombreUsuario = Personaje[0].nombre  
-    //const tiempoUsuario = new resultadoFinal(Player1.tiempo)
-    
-    const nombreUsuarioJSON = JSON.stringify(nombreUsuario)
-    //const tiempoUsuarioJSON = JSON.stringify(tiempoUsuario)
-    
-    localStorage.setItem("name", nombreUsuarioJSON)
-    //localStorage.setItem("time", tiempoUsuarioJSON)
-    
-    const nombreUsuarioString = localStorage.getItem("name")
-    //const tiempoUsuarioString = localStorage.getItem("time")
-    
-    const nombreUsuarioParse = JSON.parse(nombreUsuarioString)        
-    // const tiempoUsuarioParse = JSON.parse(tiempoUsuarioString)
-    
-    const tablaResultados = document.getElementById("TablaResultadoFinal");
-    const nuevaFila = document.createElement("tr");
-    
-    const columnaNombre = document.createElement("td");
-    columnaNombre.textContent = nombreUsuarioParse;
-    
-    //const columnaTiempo = document.createElement("td");
-    //columnaTiempo.textContent = tiempoUsuarioParse;
-    
-    // Agregar las nuevas columnas a la fila de resultados
-    nuevaFila.appendChild(columnaNombre);
-    //nuevaFila.appendChild(columnaTiempo);
-    tablaResultados.appendChild(nuevaFila);
-    
-    const ResultadosFinales = [];
-    ResultadosFinales.push(nombreUsuarioParse)
-    localStorage.setItem("jugadores", ResultadosFinales);
-    
-    const resultadosAnteriores = JSON.parse(localStorage.getItem(ResultadosFinales));
-    resultadosAnteriores.forEach((resultado) => {
-        const nuevaFila = document.createElement("tr");
-        nuevaFila.appendChild(columnaNombre);
-        const columnaNombre = document.createElement("td");
-      columnaNombre.textContent = resultadosAnteriores})
+    function almacenarResultados() {
+        const duracion = Duration.fromObject({ seconds: tiempoRestante });
+        const tiempoFormateado = duracion.toFormat("m:ss");
+        const resultadosAnteriores = JSON.parse(localStorage.getItem("resultados") || "[]");
+        resultadosAnteriores.push({ nombre: Personaje[0].nombre, tiempo: tiempoFormateado}); 
+        localStorage.setItem("resultados", JSON.stringify(resultadosAnteriores));
     }
+
+        function cargarResultados() {
+        const tablaResultados = document.getElementById("TablaResultadoFinal");
+        const resultadosAnteriores = JSON.parse(localStorage.getItem("resultados") || "[]");
+
+        resultadosAnteriores.forEach((resultado) => {
+            const nuevaFila = document.createElement("tr");
+
+            const columnaNombre = document.createElement("td");
+            columnaNombre.textContent = resultado.nombre;
+
+            const columnaTiempo = document.createElement("td");
+            columnaTiempo.textContent = resultado.tiempo; 
+            // Agrega las columnas a la nueva fila
+            nuevaFila.appendChild(columnaNombre);
+            nuevaFila.appendChild(columnaTiempo);
+
+            // Agrega la nueva fila al cuerpo de la tabla
+            tablaResultados.appendChild(nuevaFila);
+        });
+    }
+
+    
+
+
+
+
+
+

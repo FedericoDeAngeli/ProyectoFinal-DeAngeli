@@ -21,7 +21,6 @@ h1 {
 }
 
 #mesa img {
-  max-width: 50vh;
   width: 500px;
   height: 300px;
 }
@@ -37,7 +36,6 @@ h1 {
 }
 
 #salida img {
-  max-width: 50vh;
   width: 400px;
   height: 600px;
 }
@@ -52,16 +50,9 @@ h1 {
 #scorefinal {
   display: none;
 }
-#scorefinal table {
-  text-align: center;
+#scorefinal .table {
   width: 100%;
-}
-
-#TablaResultadoFinal td {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: solid;
-  border-color: rgb(93, 34, 230);
+  border: 10px, solid, red;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -25,6 +25,7 @@ justify-content: space-between;
 }
 
 #mesa img{
+    max-width: 50vh;
     width: 500px;
     height: 300px;
 }
@@ -40,6 +41,7 @@ justify-content: space-between;
 }
 
 #salida img{
+    max-width: 50vh;
     width: 400px;
     height: 600px;
 }
@@ -54,4 +56,22 @@ justify-content: space-between;
 
 #scorefinal{
     display: none;
+    
+    table{
+        text-align: center;
+        width: 100%;
+       
+
+        }
+        }
+   
+#TablaResultadoFinal{
+  
+
+    td{
+        border-collapse: collapse;
+border-spacing: 0;
+               border-style: solid;
+        border-color: rgb(93, 34, 230);
+    }
 }
