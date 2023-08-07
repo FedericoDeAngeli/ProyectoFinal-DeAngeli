@@ -4,7 +4,7 @@ const bodyTabla = document.getElementById("inventario");
 const MostrarContenido = document.getElementById("cuerpo");
 const PuertaSalida = document.getElementById("salida");
 const Score = document.getElementById("scorefinal")
-const BotonResultado = document.getElementById("enviarresultado")
+const BotonResultado = document.getElementById("botonResultado")
 const Player1 = document.getElementById("player");
 const Tiempo1 = document.getElementById("score");
 
@@ -13,6 +13,7 @@ let bata = document.getElementById("bata");
 let caja = document.getElementById("caja");
 let invent = document.getElementById("inventario");
 let nota = document.getElementById("nota");
+const h2title = document.getElementById("h2partida")
 let opcion1;
 let opcion2;
 
@@ -57,6 +58,7 @@ function registrarusuario() {
 function EndGame() {
     MostrarContenido.style.display = "none"
     BotonRegistrar.style.display = "none"
+    h2.style.display ="none"
     Swal.fire({
         icon: "error",
         text: "Se acabó el tiempo. Perdiste el juego"
@@ -365,12 +367,14 @@ icon: "success"
     })
     MostrarContenido.style.display = "none";
     RegistrarNombre.style.display = "none"
+    h2title.style.display = "none"
     TablaPeriodiocaImg.style.display = "none"
     Score.style.display = "block"
     almacenarResultados();
 cargarResultados();
 clearInterval(intervaloContador)
 }
+
 
     
     function almacenarResultados() {
@@ -399,9 +403,60 @@ clearInterval(intervaloContador)
 
             // Agrega la nueva fila al cuerpo de la tabla
             tablaResultados.appendChild(nuevaFila);
+
+            resultadotiempoparse = parseFloat(resultado.tiempo)
+
+            BotonResultado.style.display = "block";
+            BotonResultado.addEventListener("click", btnResultado)
+            function btnResultado(){
+                fetch(`./javascript/resultados.json`)
+                .then((response) => {
+                    if(response.ok){
+                        return response.json()
+                    }else{
+                        throw new Error ("Hubo un error en el servidor");
+                    }
+                }).then((resultados) =>{
+                    if(resultadotiempoparse >= "8"){
+                        swal.fire({
+                            text: resultados[0].Resultado
+                        })
+                    }else{
+                        if(resultadotiempoparse >= 6 && resultadotiempoparse <8){
+                            swal.fire({
+                                text: resultados[1].Resultado
+                            })
+                        }else{
+                            if(resultadotiempoparse >= 4 && resultadotiempoparse <6){
+                                swal.fire({
+                                    text: resultados[2].Resultado
+                                }) 
+                            }else{
+                                if(resultadotiempoparse >=2 && resultadotiempoparse <4){
+                                    swal.fire({
+                                        text: resultados[3].Resultado
+                                    })
+                                }else{
+                                    swal.fire({
+                                        text: resultados[4].Resultado
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }).catch((error) => 
+                swal.fire({
+                    text: error
+                }))
+            }
         });
+
+       
+
+
     }
 
+    
     
 
 

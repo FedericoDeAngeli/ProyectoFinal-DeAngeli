@@ -1,0 +1,5 @@
+[{"id": 1, "tiempoRestante": "Más de 8 minutos", "Resultado": "Genio"},
+{"id":2, "tiempoRestante": "Entre 6 - 8 minutos", "Resultado":"Muy bien"},
+{"id":3, "tiempoRestante": "Entre 4 - 6 minutos", "Resultado":"Promedio"},
+{"id":4, "tiempoRestante": "Entre 2 - 4 minutos", "Resultado":"Esperaba más de vos"},
+{"id":5, "tiempoRestante": "Menos de 2 minutos", "Resultado": "Decepcionante"}]

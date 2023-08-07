@@ -409,3 +409,17 @@ function btnResultado() {
 
 
 
+
+
+
+
+function btnResultado(){
+    fetch("./resultados.json")
+    .then((resp) => {
+        if(resp.ok){
+            return resp.json();
+        }else{
+            throw new Error ("Hubo un error en el servidor");
+        }
+    }).then((resultados) =>{
+       console.log(resultados)})}

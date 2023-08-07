@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <title>Simulador</title>
+    <title>Juego: Sala de escape</title>
 </head>
 <body>
 <header>
     <h1>Sala de Escape "El Laboratorio" del Prof. Fede</h1>
-    <h2>Esta es la partida de:</h2>
+    <h2 id="h2partida">Esta es la partida de:</h2>
     <form action="">
         <label for="name">
             <input type="text" name="name" id="name">
@@ -19,6 +19,9 @@
         </label>
     </form>
 </header>
+<audio src="./audio/suspenso.mp3" type="audio/mp3" controls autoplay loop >
+    <p>Tu navegador no soporta audio</p>
+</audio>
 <div id="cuerpo">
     <div id="nota">
         <img src="./img/nota.png" alt="nota">
@@ -45,16 +48,7 @@
 
 </div>
 <div  id="scorefinal">
-<!-- <form action="scorefinals">Registro de tiempo</form>
-<label for="player">Nombre del jugador
-    <input type="text" name="player" id="player">
-</label>
-<label for="score">Tiempo (en minutos)
-    <input type="number" name="score" id="score">
-</label>
-<label for="enviarresultado">
-    <input type="submit" name="enviarresultado" id="enviarresultado">
-</label> -->
+
 <table>
     <thead>Resultados</thead>
     <tr>
@@ -66,7 +60,12 @@
 
 </table>
 
+<button id="botonResultado">Compará con la tabla y fijate en que nivel estás!</button>
+
 </div>
+
+
+   
 
   
 <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
